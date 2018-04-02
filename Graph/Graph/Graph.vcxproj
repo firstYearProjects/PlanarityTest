@@ -115,11 +115,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Graph.h" />
-  </ItemGroup>
-  <ItemGroup>
+    <ClCompile Include="BrutePlanarityTest.cpp" />
     <ClCompile Include="Graph.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PlanarityTest.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="BrutePlanarityTest.h" />
+    <ClInclude Include="Graph.h" />
+    <ClInclude Include="PlanarityTest.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
