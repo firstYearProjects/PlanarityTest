@@ -27,6 +27,8 @@ private:
 
 
 	void DFS(int v, int prev, bool *color, vector<int>& cycle, vector<vector<int>>& allCycles);
+
+	void rotateToSmallest(vector<int>& cycle);
 	vector< vector<int> > getVectorOfCycles();
 };
 
