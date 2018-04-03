@@ -56,8 +56,26 @@ void BrutePlanarityTest::DFS(int v, int prev, bool *color, vector<int>& cycle, v
 				if (cycle.size() > 2)
 				{
 					vector<int> tmpCyc = getCycle(tmpV, v, cycle);
+					rotateToSmallest(tmpCyc);
 					bool checker = 1;
-					
+					for (auto finV = allCycles.begin(); finV != allCycles.end(); ++finV)
+					{
+						bool flag = 1;
+						for (int elVec = 0; elVec < min(tmpCyc.size(), (*finV).size()); elVec++)
+						{
+							if (tmpCyc[elVec] != (*finV)[elVec])
+							{
+								flag = 0;
+								break;
+							}
+						}
+
+						if (flag == 1)
+						{
+							checker = 0;
+							break;
+						}
+					}
 					if (checker == 1)
 						allCycles.push_back(tmpCyc);
 				}
@@ -89,19 +107,19 @@ void BrutePlanarityTest::rotateToSmallest(vector<int>& cycle)
 	size_t posmin = 0;
 	for (int i = 0; i < cycle.size(); i++)
 	{
-		if (etalon < cycle[i])
+		if (etalon > cycle[i])
 		{
 			etalon = cycle[i];
 			posmin = i;
 		}
 	}
-	vector<int> newTop;
+
 	for (int i = 0; i < posmin; i++)
 	{
-		newTop.push_back(cycle[i]);
+		int tmpVert = cycle[0];
 		pop_front(cycle);
+		cycle.push_back(tmpVert);
 	}
-	//newTop.push_back(cycle)
 }
 
 
