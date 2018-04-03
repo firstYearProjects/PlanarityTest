@@ -19,6 +19,7 @@ public:
 	BrutePlanarityTest(const Graph& graph) : _graph(graph) {};
 
 	bool checkPlanarity();
+	bool BruteCheck();
 
 	void printAllCycles();
 private:
@@ -30,6 +31,9 @@ private:
 	void DFS(int v, int prev, bool *color, vector<int>& cycle, vector<vector<int>>& allCycles);
 
 	void rotateToSmallest(vector<int>& cycle);
+	bool checkCycle(const vector<int>& cycle);
+	bool K5check(const vector<int>& cycle);
+	bool K33check(const vector<int>& cycle);
 	vector< vector<int> > getVectorOfCycles();
 };
 

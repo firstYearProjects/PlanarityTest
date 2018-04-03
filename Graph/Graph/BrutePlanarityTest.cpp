@@ -14,7 +14,7 @@ bool BrutePlanarityTest::checkPlanarity()
 		return false;
 	}
 
-	return 0;
+	return BruteCheck();
 }
 
 void BrutePlanarityTest::printAllCycles()
@@ -53,7 +53,8 @@ void BrutePlanarityTest::DFS(int v, int prev, bool *color, vector<int>& cycle, v
 		{
 			if (prev != tmpV)
 			{
-				if (cycle.size() > 2)
+				// We need to look only for cycles that have >=5 verts.
+				if (cycle.size() >= 5)
 				{
 					vector<int> tmpCyc = getCycle(tmpV, v, cycle);
 					rotateToSmallest(tmpCyc);
@@ -113,13 +114,127 @@ void BrutePlanarityTest::rotateToSmallest(vector<int>& cycle)
 			posmin = i;
 		}
 	}
-
 	for (int i = 0; i < posmin; i++)
 	{
 		int tmpVert = cycle[0];
+		//cycle.erase(cycle.begin() + 1);
 		pop_front(cycle);
 		cycle.push_back(tmpVert);
 	}
+	/*
+	etalon = cycle[1];
+	posmin = 1;
+	for (int i = 1; i < cycle.size(); i++)
+	{
+		if (etalon > cycle[i])
+		{
+			etalon = cycle[i];
+			posmin = i;
+		}
+	}
+	for (int i = 1; i < posmin; i++)
+	{
+		int tmpVert = cycle[1];
+		cycle.erase(cycle.begin() + 1);
+		//pop_front(cycle);
+		cycle.push_back(tmpVert);
+	}*/
+}
+
+bool BrutePlanarityTest::BruteCheck()
+{
+	vector< vector<int> > cycles = getVectorOfCycles();
+
+	for (auto cycle = cycles.begin(); cycle != cycles.end(); ++cycle)
+	{
+		if (checkCycle(*cycle) == 0)
+			return 0;
+	}
+	return 1;
+}
+
+bool BrutePlanarityTest::checkCycle(const vector<int>& cycle)
+{
+	for (int a = 0; a < cycle.size() - 4; a++)
+	{
+		for (int b = a + 1; b < cycle.size() - 3; b++)
+		{
+			for (int c = b + 1; c < cycle.size() - 2; c++)
+			{
+				for (int d = c + 1; d < cycle.size() - 1; d++)
+				{
+					for (int e = d + 1; e < cycle.size(); e++)
+					{
+						vector<int> tmpCyc;
+						tmpCyc.push_back(cycle[a]);
+						tmpCyc.push_back(cycle[b]);
+						tmpCyc.push_back(cycle[c]);
+						tmpCyc.push_back(cycle[d]);
+						tmpCyc.push_back(cycle[e]);
+
+						if (K5check(tmpCyc) == 1)
+							return 0;
+					}
+				}
+			}
+		}
+	}
+
+	for (int a = 0; a < cycle.size() - 5; a++)
+	{
+		for (int b = a + 1; b < cycle.size() - 4; b++)
+		{
+			for (int c = b + 1; c < cycle.size() - 3; c++)
+			{
+				for (int d = c + 1; d < cycle.size() - 2; d++)
+				{
+					for (int e = d + 1; e < cycle.size() - 1; e++)
+					{
+						for (int f = e + 1; f < cycle.size(); f++)
+						{
+							vector<int> tmpCyc;
+							tmpCyc.push_back(cycle[a]);
+							tmpCyc.push_back(cycle[b]);
+							tmpCyc.push_back(cycle[c]);
+							tmpCyc.push_back(cycle[d]);
+							tmpCyc.push_back(cycle[e]);
+							tmpCyc.push_back(cycle[f]);
+
+							if (K33check(tmpCyc) == 1)
+								return 0;
+						}
+					}
+				}
+			}
+		}
+	}
+	return 1;
+}
+
+bool BrutePlanarityTest::K5check(const vector<int>& cycle)
+{
+	bool res = 1;
+	for (int i = 0; i < 4; i++)
+	{
+		for (int j = i + 1; j < 5; j++)
+		{
+			res &= _graph.connected(cycle[i], cycle[j]);
+		}
+	}
+	return res;
+}
+
+bool BrutePlanarityTest::K33check(const vector<int>& cycle)
+{
+	bool res = 1;
+	for (int i = 0; i < 5; i++)
+	{
+		for (int j = i + 1; j < 6; j+=2)
+		{
+			res &= _graph.connected(cycle[i], cycle[j]);
+		}
+	}
+	return res;
 }
 
 
