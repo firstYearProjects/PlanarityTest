@@ -117,28 +117,9 @@ void BrutePlanarityTest::rotateToSmallest(vector<int>& cycle)
 	for (int i = 0; i < posmin; i++)
 	{
 		int tmpVert = cycle[0];
-		//cycle.erase(cycle.begin() + 1);
 		pop_front(cycle);
 		cycle.push_back(tmpVert);
 	}
-	/*
-	etalon = cycle[1];
-	posmin = 1;
-	for (int i = 1; i < cycle.size(); i++)
-	{
-		if (etalon > cycle[i])
-		{
-			etalon = cycle[i];
-			posmin = i;
-		}
-	}
-	for (int i = 1; i < posmin; i++)
-	{
-		int tmpVert = cycle[1];
-		cycle.erase(cycle.begin() + 1);
-		//pop_front(cycle);
-		cycle.push_back(tmpVert);
-	}*/
 }
 
 bool BrutePlanarityTest::BruteCheck()
@@ -179,29 +160,31 @@ bool BrutePlanarityTest::checkCycle(const vector<int>& cycle)
 			}
 		}
 	}
-
-	for (int a = 0; a < cycle.size() - 5; a++)
+	if (cycle.size() > 5)
 	{
-		for (int b = a + 1; b < cycle.size() - 4; b++)
+		for (int a = 0; a < cycle.size() - 5; a++)
 		{
-			for (int c = b + 1; c < cycle.size() - 3; c++)
+			for (int b = a + 1; b < cycle.size() - 4; b++)
 			{
-				for (int d = c + 1; d < cycle.size() - 2; d++)
+				for (int c = b + 1; c < cycle.size() - 3; c++)
 				{
-					for (int e = d + 1; e < cycle.size() - 1; e++)
+					for (int d = c + 1; d < cycle.size() - 2; d++)
 					{
-						for (int f = e + 1; f < cycle.size(); f++)
+						for (int e = d + 1; e < cycle.size() - 1; e++)
 						{
-							vector<int> tmpCyc;
-							tmpCyc.push_back(cycle[a]);
-							tmpCyc.push_back(cycle[b]);
-							tmpCyc.push_back(cycle[c]);
-							tmpCyc.push_back(cycle[d]);
-							tmpCyc.push_back(cycle[e]);
-							tmpCyc.push_back(cycle[f]);
+							for (int f = e + 1; f < cycle.size(); f++)
+							{
+								vector<int> tmpCyc;
+								tmpCyc.push_back(cycle[a]);
+								tmpCyc.push_back(cycle[b]);
+								tmpCyc.push_back(cycle[c]);
+								tmpCyc.push_back(cycle[d]);
+								tmpCyc.push_back(cycle[e]);
+								tmpCyc.push_back(cycle[f]);
 
-							if (K33check(tmpCyc) == 1)
-								return 0;
+								if (K33check(tmpCyc) == 1)
+									return 0;
+							}
 						}
 					}
 				}

@@ -1,31 +1,79 @@
 #include "Graph.h"
 #include"BrutePlanarityTest.h"
-//using namespace std;
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+void Test(const Graph& g, string name, bool expected)
+{
+	BrutePlanarityTest m(g);
+	cout << name << '\n';
+	bool res = m.checkPlanarity();
+	cout << (res ? "planar : " : "not planar : ");
+	cout << ((res == expected) ? "correct" : "wrong") << '\n';
+}
+
+
 
 int main()
 {
-	// K5
-	Graph g(6);
-	g.addEdge(0, 1);
-	g.addEdge(0, 2);
-	g.addEdge(0, 3);
-	g.addEdge(0, 4);
+	{
+		// K5
+		Graph g(5);
+		g.addEdge(0, 1);
+		g.addEdge(0, 2);
+		g.addEdge(0, 3);
+		g.addEdge(0, 4);
 
-	g.addEdge(1, 2);
-	g.addEdge(1, 3);
-	g.addEdge(1, 4);
+		g.addEdge(1, 2);
+		g.addEdge(1, 3);
+		g.addEdge(1, 4);
 
-	g.addEdge(2, 3);
-	g.addEdge(2, 4);
+		g.addEdge(2, 3);
+		g.addEdge(2, 4);
 
-	g.addEdge(3, 4);
-	
-	// odd with
-	g.addEdge(0, 5);
+		g.addEdge(3, 4);
+		
+		Test(g, "K5", 0);
+	}
 
-	BrutePlanarityTest m(g);
-	//m.printAllCycles();
-	cout << "\n" << m.checkPlanarity() << " " << m.BruteCheck();
+	{
+		// K33
+		Graph r(6);
+		r.addEdge(0, 3);
+		r.addEdge(0, 4);
+		r.addEdge(0, 5);
+
+		r.addEdge(1, 3);
+		r.addEdge(1, 4);
+		r.addEdge(1, 5);
+
+		r.addEdge(2, 3);
+		r.addEdge(2, 4);
+		r.addEdge(2, 5);
+
+		Test(r, "K33", 0);
+	}
+
+	{
+		// almost K33
+		Graph r(6);
+		r.addEdge(0, 3);
+		//r.addEdge(0, 4);
+		r.addEdge(0, 5);
+
+		r.addEdge(1, 3);
+		//r.addEdge(1, 4);
+		r.addEdge(1, 5);
+
+		r.addEdge(2, 3);
+		r.addEdge(2, 4);
+		r.addEdge(2, 5);
+
+		Test(r, "K33", 1);
+	}
+
 
 	system("pause");
 	return 0;
