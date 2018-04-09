@@ -1,17 +1,2 @@
-﻿  BrutePlanarityTest.cpp
-d:\work\git\planaritytest\graph\graph\bruteplanaritytest.cpp(65): warning C4018: <: несоответствие типов со знаком и без знака
-d:\work\git\planaritytest\graph\graph\bruteplanaritytest.cpp(109): warning C4018: <: несоответствие типов со знаком и без знака
-d:\work\git\planaritytest\graph\graph\bruteplanaritytest.cpp(117): warning C4018: <: несоответствие типов со знаком и без знака
-d:\work\git\planaritytest\graph\graph\bruteplanaritytest.cpp(139): warning C4018: <: несоответствие типов со знаком и без знака
-d:\work\git\planaritytest\graph\graph\bruteplanaritytest.cpp(141): warning C4018: <: несоответствие типов со знаком и без знака
-d:\work\git\planaritytest\graph\graph\bruteplanaritytest.cpp(143): warning C4018: <: несоответствие типов со знаком и без знака
-d:\work\git\planaritytest\graph\graph\bruteplanaritytest.cpp(145): warning C4018: <: несоответствие типов со знаком и без знака
-d:\work\git\planaritytest\graph\graph\bruteplanaritytest.cpp(147): warning C4018: <: несоответствие типов со знаком и без знака
-d:\work\git\planaritytest\graph\graph\bruteplanaritytest.cpp(165): warning C4018: <: несоответствие типов со знаком и без знака
-d:\work\git\planaritytest\graph\graph\bruteplanaritytest.cpp(167): warning C4018: <: несоответствие типов со знаком и без знака
-d:\work\git\planaritytest\graph\graph\bruteplanaritytest.cpp(169): warning C4018: <: несоответствие типов со знаком и без знака
-d:\work\git\planaritytest\graph\graph\bruteplanaritytest.cpp(171): warning C4018: <: несоответствие типов со знаком и без знака
-d:\work\git\planaritytest\graph\graph\bruteplanaritytest.cpp(173): warning C4018: <: несоответствие типов со знаком и без знака
-d:\work\git\planaritytest\graph\graph\bruteplanaritytest.cpp(175): warning C4018: <: несоответствие типов со знаком и без знака
-d:\work\git\planaritytest\graph\graph\bruteplanaritytest.cpp(228): warning C4018: <: несоответствие типов со знаком и без знака
+﻿  main.cpp
   Graph.vcxproj -> D:\work\git\PlanarityTest\Graph\Debug\Graph.exe
