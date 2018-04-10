@@ -30,6 +30,10 @@ public:
 	// Return 1 if ID1 and ID2 are non-orient connected.
 	bool connected(size_t ID1, size_t ID2);
 
+	// DFS lookup on whether there is a way from u to v without verts from cycle in it.
+	bool findWay(int u, int v, const vector<int>& cycle);
+	bool dfsWay(int u, int v, const vector<int>& cycle, vector<bool>& visited);
+
 private:
 	vector< vector<int> > _vertexes;
 	size_t _cntEdges;

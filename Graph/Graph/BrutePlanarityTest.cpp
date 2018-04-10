@@ -64,7 +64,7 @@ void BrutePlanarityTest::DFS(int v, int prev, bool *color, vector<int>& cycle, v
 						for (auto finV = allCycles.begin(); finV != allCycles.end(); ++finV)
 						{
 							bool flag = 1;
-							for (int elVec = 0; elVec < min(tmpCyc.size(), (*finV).size()); elVec++)
+							for (size_t elVec = 0; elVec < min(tmpCyc.size(), (*finV).size()); elVec++)
 							{
 								if (tmpCyc[elVec] != (*finV)[elVec])
 								{
@@ -109,7 +109,7 @@ void BrutePlanarityTest::rotateToSmallest(vector<int>& cycle)
 {
 	int etalon = cycle[0];
 	size_t posmin = 0;
-	for (int i = 0; i < cycle.size(); i++)
+	for (size_t i = 0; i < cycle.size(); i++)
 	{
 		if (etalon > cycle[i])
 		{
@@ -117,7 +117,7 @@ void BrutePlanarityTest::rotateToSmallest(vector<int>& cycle)
 			posmin = i;
 		}
 	}
-	for (int i = 0; i < posmin; i++)
+	for (size_t i = 0; i < posmin; i++)
 	{
 		int tmpVert = cycle[0];
 		pop_front(cycle);
@@ -139,15 +139,15 @@ bool BrutePlanarityTest::BruteCheck()
 
 bool BrutePlanarityTest::checkCycle(const vector<int>& cycle)
 {
-	for (int a = 0; a < cycle.size() - 4; a++)
+	for (size_t a = 0; a < cycle.size() - 4; a++)
 	{
-		for (int b = a + 1; b < cycle.size() - 3; b++)
+		for (size_t b = a + 1; b < cycle.size() - 3; b++)
 		{
-			for (int c = b + 1; c < cycle.size() - 2; c++)
+			for (size_t c = b + 1; c < cycle.size() - 2; c++)
 			{
-				for (int d = c + 1; d < cycle.size() - 1; d++)
+				for (size_t d = c + 1; d < cycle.size() - 1; d++)
 				{
-					for (int e = d + 1; e < cycle.size(); e++)
+					for (size_t e = d + 1; e < cycle.size(); e++)
 					{
 						vector<int> tmpCyc;
 						tmpCyc.push_back(cycle[a]);
@@ -165,17 +165,17 @@ bool BrutePlanarityTest::checkCycle(const vector<int>& cycle)
 	}
 	if (cycle.size() > 5)
 	{
-		for (int a = 0; a < cycle.size() - 5; a++)
+		for (size_t a = 0; a < cycle.size() - 5; a++)
 		{
-			for (int b = a + 1; b < cycle.size() - 4; b++)
+			for (size_t b = a + 1; b < cycle.size() - 4; b++)
 			{
-				for (int c = b + 1; c < cycle.size() - 3; c++)
+				for (size_t c = b + 1; c < cycle.size() - 3; c++)
 				{
-					for (int d = c + 1; d < cycle.size() - 2; d++)
+					for (size_t d = c + 1; d < cycle.size() - 2; d++)
 					{
-						for (int e = d + 1; e < cycle.size() - 1; e++)
+						for (size_t e = d + 1; e < cycle.size() - 1; e++)
 						{
-							for (int f = e + 1; f < cycle.size(); f++)
+							for (size_t f = e + 1; f < cycle.size(); f++)
 							{
 								vector<int> tmpCyc;
 								tmpCyc.push_back(cycle[a]);
@@ -210,7 +210,7 @@ bool BrutePlanarityTest::K5check(const vector<int>& cycle)
 				continue;
 			else
 			{
-				tmp = findWay(cycle[i], cycle[j], cycle);
+				tmp = _graph.findWay(cycle[i], cycle[j], cycle);
 			}
 			res &= tmp;
 		}
@@ -230,7 +230,7 @@ bool BrutePlanarityTest::K33check(const vector<int>& cycle)
 				continue;
 			else
 			{
-				tmp = findWay(cycle[i], cycle[j], cycle);
+				tmp = _graph.findWay(cycle[i], cycle[j], cycle);
 			}
 			res &= tmp;
 		}
@@ -243,7 +243,7 @@ vector< vector<int> > BrutePlanarityTest::getVectorOfCycles()
 {
 	vector<vector<int> > res;
 	bool *color = new (bool[this->_graph.size()]);
-	for (int i = 0; i < this->_graph.size(); i++)
+	for (size_t i = 0; i < this->_graph.size(); i++)
 		color[i] = 0;
 	vector<int> curPath;
 	curPath.push_back(0);
@@ -252,40 +252,5 @@ vector< vector<int> > BrutePlanarityTest::getVectorOfCycles()
 	return res;
 }
 
-bool BrutePlanarityTest::findWay(int u, int v, const vector<int>& cycle)
-{
-	vector<bool> visited(_graph.size(), 0);
-	if (dfsWay(u, v, cycle, visited))
-		return 1;
-	return 0;
-}
 
-bool BrutePlanarityTest::dfsWay(int u, int v, const vector<int>& cycle, vector<bool> visited)
-{
-	if (u == v)
-		return 1;
 
-	for (auto vert = _graph.getAdjacentVertexes(u).begin(); vert != _graph.getAdjacentVertexes(u).end(); ++vert)
-	{
-		if (visited[*vert] == 0)
-		{
-			visited[*vert] = 1;
-			bool checker = 0;
-			for (auto it = cycle.begin(); it != cycle.end(); ++it)
-			{
-				if (*it == *vert)
-				{
-					checker = 1;
-					break;
-				}
-			}
-			if (checker == 1) 
-			{
-				continue;
-			}
-			if (dfsWay(*vert, v, cycle, visited) == 1)
-				return 1;
-		}
-	}
-	return 0;
-}
