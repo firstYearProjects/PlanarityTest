@@ -18,7 +18,7 @@ void Test(const Graph& g, string name, bool expected)
 
 int main()
 {
-	{
+	/*{
 		// K5
 		Graph g(5);
 		g.addEdge(0, 1);
@@ -70,9 +70,8 @@ int main()
 		r.addEdge(2, 3);
 		r.addEdge(2, 4);
 		r.addEdge(2, 5);
-
 		Test(r, "almost K33", 1);
-	}
+	}*/
 
 	{
 		// K5 with odd

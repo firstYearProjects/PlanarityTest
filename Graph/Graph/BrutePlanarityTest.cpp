@@ -58,27 +58,30 @@ void BrutePlanarityTest::DFS(int v, int prev, bool *color, vector<int>& cycle, v
 				{
 					vector<int> tmpCyc = getCycle(tmpV, v, cycle);
 					rotateToSmallest(tmpCyc);
-					bool checker = 1;
-					for (auto finV = allCycles.begin(); finV != allCycles.end(); ++finV)
+					if (tmpCyc.size() >= 5)
 					{
-						bool flag = 1;
-						for (int elVec = 0; elVec < min(tmpCyc.size(), (*finV).size()); elVec++)
+						bool checker = 1;
+						for (auto finV = allCycles.begin(); finV != allCycles.end(); ++finV)
 						{
-							if (tmpCyc[elVec] != (*finV)[elVec])
+							bool flag = 1;
+							for (int elVec = 0; elVec < min(tmpCyc.size(), (*finV).size()); elVec++)
 							{
-								flag = 0;
+								if (tmpCyc[elVec] != (*finV)[elVec])
+								{
+									flag = 0;
+									break;
+								}
+							}
+
+							if (flag == 1)
+							{
+								checker = 0;
 								break;
 							}
 						}
-
-						if (flag == 1)
-						{
-							checker = 0;
-							break;
-						}
+						if (checker == 1)
+							allCycles.push_back(tmpCyc);
 					}
-					if (checker == 1)
-						allCycles.push_back(tmpCyc);
 				}
 			
 			}
@@ -201,7 +204,15 @@ bool BrutePlanarityTest::K5check(const vector<int>& cycle)
 	{
 		for (int j = i + 1; j < 5; j++)
 		{
-			res &= _graph.connected(cycle[i], cycle[j]);
+			//res &= _graph.connected(cycle[i], cycle[j]);
+			bool tmp = _graph.connected(cycle[i], cycle[j]);
+			if (tmp == 1)
+				continue;
+			else
+			{
+				tmp = findWay(cycle[i], cycle[j], cycle);
+			}
+			res &= tmp;
 		}
 	}
 	return res;
@@ -214,7 +225,14 @@ bool BrutePlanarityTest::K33check(const vector<int>& cycle)
 	{
 		for (int j = i + 1; j < 6; j+=2)
 		{
-			res &= _graph.connected(cycle[i], cycle[j]);
+			bool tmp = _graph.connected(cycle[i], cycle[j]);
+			if (tmp == 1)
+				continue;
+			else
+			{
+				tmp = findWay(cycle[i], cycle[j], cycle);
+			}
+			res &= tmp;
 		}
 	}
 	return res;
@@ -232,4 +250,42 @@ vector< vector<int> > BrutePlanarityTest::getVectorOfCycles()
 	DFS(0, 0, color, curPath, res);
 
 	return res;
+}
+
+bool BrutePlanarityTest::findWay(int u, int v, const vector<int>& cycle)
+{
+	vector<bool> visited(_graph.size(), 0);
+	if (dfsWay(u, v, cycle, visited))
+		return 1;
+	return 0;
+}
+
+bool BrutePlanarityTest::dfsWay(int u, int v, const vector<int>& cycle, vector<bool> visited)
+{
+	if (u == v)
+		return 1;
+
+	for (auto vert = _graph.getAdjacentVertexes(u).begin(); vert != _graph.getAdjacentVertexes(u).end(); ++vert)
+	{
+		if (visited[*vert] == 0)
+		{
+			visited[*vert] = 1;
+			bool checker = 0;
+			for (auto it = cycle.begin(); it != cycle.end(); ++it)
+			{
+				if (*it == *vert)
+				{
+					checker = 1;
+					break;
+				}
+			}
+			if (checker == 1) 
+			{
+				continue;
+			}
+			if (dfsWay(*vert, v, cycle, visited) == 1)
+				return 1;
+		}
+	}
+	return 0;
 }

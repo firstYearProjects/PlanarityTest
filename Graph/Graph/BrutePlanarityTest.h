@@ -35,6 +35,8 @@ private:
 	bool K5check(const vector<int>& cycle);
 	bool K33check(const vector<int>& cycle);
 	vector< vector<int> > getVectorOfCycles();
+	bool findWay(int u, int v, const vector<int>& cycle);
+	bool dfsWay(int u, int v, const vector<int>& cycle, const vector<bool> visited);
 };
 
 
