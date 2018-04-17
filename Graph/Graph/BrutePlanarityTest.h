@@ -7,6 +7,7 @@
 
 #include "Graph.h"
 #include <vector>
+#include <set>
 #include <iostream>
 #include <algorithm>
 #include <cassert>
@@ -28,13 +29,19 @@ private:
 	vector<int> getCycle(int begin, int end, vector<int>& cycle);
 
 
-	void DFS(int v, int prev, bool *color, vector<int>& cycle, vector<vector<int>>& allCycles, vector<bool>& visited);
+	void DFS(int v, int prev, set<int>& color, vector<int>& cycle, vector<vector<int>>& allCycles, vector<bool>& visited);
 
 	void rotateToSmallest(vector<int>& cycle);
 	bool checkCycle(const vector<int>& cycle);
 	bool K5check(const vector<int>& cycle);
 	bool K33check(const vector<int>& cycle);
 	vector< vector<int> > getVectorOfCycles();
+
+	size_t edgeHash(int first, int second)
+	{
+		hash<int> intHash;
+		return (intHash(first) << 4) + intHash(second);
+	}
 };
 
 

@@ -36,6 +36,8 @@ vector<int> BrutePlanarityTest::getCycle(int begin, int end, vector<int>& cycle)
 	{
 		resCycle.push_back(cycle[curEl]);
 		curEl--;
+		if (curEl == 0)
+			break;
 	}
 	resCycle.push_back(cycle[curEl]);
 	return resCycle;
@@ -43,59 +45,62 @@ vector<int> BrutePlanarityTest::getCycle(int begin, int end, vector<int>& cycle)
 
 
 
-void BrutePlanarityTest::DFS(int v, int prev, bool *color, vector<int>& cycle, vector<vector<int>>& allCycles, vector<bool>& visited)
+void BrutePlanarityTest::DFS(int v, int prev, set<int>& color, vector<int>& cycle, vector<vector<int>>& allCycles, vector<bool>& visited)
 {
-	color[v] = 1;
+	color.insert(edgeHash(prev,v));
+	color.insert(edgeHash(v, prev));
 	visited[v] = 1;
 	for (size_t i = 0; i < _graph.getAdjacentVertexes(v).size(); i++)
 	{
 		int tmpV = _graph.getAdjacentVertexes(v)[i];
-		if (color[tmpV] == 1)
+		if (color.find(edgeHash(v, tmpV)) == color.end())
 		{
-			if (prev != tmpV)
+			if (visited[tmpV] == 1)
 			{
-				// We need to look only for cycles that have >=5 verts.
-				if (cycle.size() >= 5)
+				if (prev != tmpV)
 				{
-					vector<int> tmpCyc = getCycle(tmpV, v, cycle);
-					rotateToSmallest(tmpCyc);
-					if (tmpCyc.size() >= 5)
+					// We need to look only for cycles that have >=5 verts.
+					if (cycle.size() >= 5)
 					{
-						bool checker = 1;
-						for (auto finV = allCycles.begin(); finV != allCycles.end(); ++finV)
+						vector<int> tmpCyc = getCycle(tmpV, v, cycle);
+						rotateToSmallest(tmpCyc);
+						if (tmpCyc.size() >= 5)
 						{
-							bool flag = 1;
-							for (size_t elVec = 0; elVec < min(tmpCyc.size(), (*finV).size()); elVec++)
+							bool checker = 1;
+							for (auto finV = allCycles.begin(); finV != allCycles.end(); ++finV)
 							{
-								if (tmpCyc[elVec] != (*finV)[elVec])
+								bool flag = 1;
+								for (size_t elVec = 0; elVec < min(tmpCyc.size(), (*finV).size()); elVec++)
 								{
-									flag = 0;
+									if (tmpCyc[elVec] != (*finV)[elVec])
+									{
+										flag = 0;
+										break;
+									}
+								}
+
+								if (flag == 1)
+								{
+									checker = 0;
 									break;
 								}
 							}
-
-							if (flag == 1)
-							{
-								checker = 0;
-								break;
-							}
+							if (checker == 1)
+								allCycles.push_back(tmpCyc);
 						}
-						if (checker == 1)
-							allCycles.push_back(tmpCyc);
 					}
-				}
-			
-			}
 
-		}
-		else
-		{
-			cycle.push_back(tmpV);
-			//color[_graph.getAdjacentVertexes(v)[i]] = 1;
-			DFS(tmpV, v, color, cycle, allCycles, visited);
+				}
+
+			}
+			else
+			{
+				cycle.push_back(tmpV);
+
+				DFS(tmpV, v, color, cycle, allCycles, visited);
+			}
 		}
 	}
-	color[v] = 0;
 	cycle.pop_back();
 }
 
@@ -247,16 +252,14 @@ vector< vector<int> > BrutePlanarityTest::getVectorOfCycles()
 	// vector of cycles
 	vector<vector<int> > res; 
 	// used to get all elementary cycles in connected component
-	bool *color = new (bool[this->_graph.size()]);
+	//bool *color = new (bool[this->_graph.size()]);
+	set<int> color;
 
 	for (int i = 0; i < this->_graph.size(); i++)
 	{
 		// found new connected component
 		if (visited[i] == 0)
 		{
-			// reassigne colors 
-			for (size_t i = 0; i < this->_graph.size(); i++)
-				color[i] = 0;
 			vector<int> curPath;
 			curPath.push_back(i);
 			DFS(i, i, color, curPath, res, visited);
