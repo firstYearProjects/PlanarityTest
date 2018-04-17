@@ -28,7 +28,7 @@ private:
 	vector<int> getCycle(int begin, int end, vector<int>& cycle);
 
 
-	void DFS(int v, int prev, bool *color, vector<int>& cycle, vector<vector<int>>& allCycles);
+	void DFS(int v, int prev, bool *color, vector<int>& cycle, vector<vector<int>>& allCycles, vector<bool>& visited);
 
 	void rotateToSmallest(vector<int>& cycle);
 	bool checkCycle(const vector<int>& cycle);

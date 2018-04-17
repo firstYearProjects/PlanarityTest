@@ -53,38 +53,38 @@ int main()
 	{
 		cout << "\n";
 		// K33
-		Graph r(6);
-		r.addEdge(0, 3);
-		r.addEdge(0, 4);
-		r.addEdge(0, 5);
+		Graph g(6);
+		g.addEdge(0, 3);
+		g.addEdge(0, 4);
+		g.addEdge(0, 5);
 
-		r.addEdge(1, 3);
-		r.addEdge(1, 4);
-		r.addEdge(1, 5);
+		g.addEdge(1, 3);
+		g.addEdge(1, 4);
+		g.addEdge(1, 5);
 
-		r.addEdge(2, 3);
-		r.addEdge(2, 4);
-		r.addEdge(2, 5);
+		g.addEdge(2, 3);
+		g.addEdge(2, 4);
+		g.addEdge(2, 5);
 
-		Test(r, "K33", 0);
+		Test(g, "K33", 0);
 	}
 
 	{
 		cout << "\n";
 		// Almost K33
-		Graph r(6);
-		r.addEdge(0, 3);
-		//r.addEdge(0, 4);
-		r.addEdge(0, 5);
+		Graph g(6);
+		g.addEdge(0, 3);
+		//g.addEdge(0, 4);
+		g.addEdge(0, 5);
 
-		r.addEdge(1, 3);
-		//r.addEdge(1, 4);
-		r.addEdge(1, 5);
+		g.addEdge(1, 3);
+		//g.addEdge(1, 4);
+		g.addEdge(1, 5);
 
-		r.addEdge(2, 3);
-		r.addEdge(2, 4);
-		r.addEdge(2, 5);
-		Test(r, "almost K33", 1);
+		g.addEdge(2, 3);
+		g.addEdge(2, 4);
+		g.addEdge(2, 5);
+		Test(g, "almost K33", 1);
 	}
 
 	{
@@ -117,61 +117,62 @@ int main()
 	{
 		cout << "\n";
 		// K33 with odd
-		Graph r(10);
-		r.addEdge(0, 3);
-		r.addEdge(0, 4);
-		r.addEdge(0, 5);
+		Graph g(10);
+		g.addEdge(0, 3);
+		g.addEdge(0, 4);
+		g.addEdge(0, 5);
 
-		r.addEdge(1, 3);
-		r.addEdge(1, 4);
-		r.addEdge(1, 5);
+		g.addEdge(1, 3);
+		g.addEdge(1, 4);
+		g.addEdge(1, 5);
 
-		r.addEdge(2, 3);
-		r.addEdge(2, 4);
-		r.addEdge(2, 5);
+		g.addEdge(2, 3);
+		g.addEdge(2, 4);
+		g.addEdge(2, 5);
 
-		r.addEdge(9, 8); // more components
+		g.addEdge(9, 8); // more components
 
-		Test(r, "K33 with odd", 0);
+		Test(g, "K33 with odd", 0);
 	}
 
 	{
 		cout << "\n";
 		// K33 + K5
-		Graph r(20);
-		r.addEdge(0, 3);
-		r.addEdge(0, 4);
-		r.addEdge(0, 5);
+		Graph g(20);
+		// K5 part
+		g.addEdge(0, 1);
+		g.addEdge(0, 2);
+		g.addEdge(0, 3);
+		g.addEdge(0, 4);
 
-		r.addEdge(1, 3);
-		r.addEdge(1, 4);
-		r.addEdge(1, 5);
+		g.addEdge(1, 2);
+		g.addEdge(1, 3);
+		g.addEdge(1, 4);
 
-		r.addEdge(2, 3);
-		r.addEdge(2, 4);
-		r.addEdge(2, 5);
+		g.addEdge(2, 3);
+		g.addEdge(2, 4);
+
+		g.addEdge(3, 4);
 		///
-		r.addEdge(5, 6);
-		r.addEdge(5, 7);
-		r.addEdge(5, 8);
-		r.addEdge(5, 9);
+		g.addEdge(10, 13);
+		g.addEdge(10, 14);
+		g.addEdge(10, 15);
 
-		r.addEdge(6, 7);
-		r.addEdge(6, 8);
-		r.addEdge(6, 9);
+		g.addEdge(11, 13);
+		g.addEdge(11, 14);
+		g.addEdge(11, 15);
 
-		r.addEdge(7, 8);
-		r.addEdge(7, 9);
+		g.addEdge(12, 13);
+		g.addEdge(12, 14);
+		g.addEdge(12, 15);
 
-		r.addEdge(8, 9);
-
-		Test(r, "K33 + K5", 0);
+		Test(g, "K33 + K5", 0);
 	}
 
 	{
 		cout << "\n";
 		// FULL 1001
-		Test(getCompleteGraph(1001), "full 1001", 0);
+		Test(getCompleteGraph(10), "full 1001", 0);
 	}
 
 	system("pause");

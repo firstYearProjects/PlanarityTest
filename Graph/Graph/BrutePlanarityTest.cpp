@@ -9,10 +9,10 @@ bool BrutePlanarityTest::checkPlanarity()
 		return true;
 
 	// Euler formula check.
-	if (vertexesCount > 2 && _cntEdges > (3 * vertexesCount - 6)) 
+	/*if (vertexesCount > 2 && _cntEdges > (3 * vertexesCount - 6)) 
 	{
 		return false;
-	}
+	}*/
 
 	return BruteCheck();
 }
@@ -43,9 +43,10 @@ vector<int> BrutePlanarityTest::getCycle(int begin, int end, vector<int>& cycle)
 
 
 
-void BrutePlanarityTest::DFS(int v, int prev, bool *color, vector<int>& cycle, vector<vector<int>>& allCycles)
+void BrutePlanarityTest::DFS(int v, int prev, bool *color, vector<int>& cycle, vector<vector<int>>& allCycles, vector<bool>& visited)
 {
 	color[v] = 1;
+	visited[v] = 1;
 	for (size_t i = 0; i < _graph.getAdjacentVertexes(v).size(); i++)
 	{
 		int tmpV = _graph.getAdjacentVertexes(v)[i];
@@ -91,7 +92,7 @@ void BrutePlanarityTest::DFS(int v, int prev, bool *color, vector<int>& cycle, v
 		{
 			cycle.push_back(tmpV);
 			//color[_graph.getAdjacentVertexes(v)[i]] = 1;
-			DFS(tmpV, v, color, cycle, allCycles);
+			DFS(tmpV, v, color, cycle, allCycles, visited);
 		}
 	}
 	color[v] = 0;
@@ -241,14 +242,27 @@ bool BrutePlanarityTest::K33check(const vector<int>& cycle)
 
 vector< vector<int> > BrutePlanarityTest::getVectorOfCycles()
 {
-	vector<vector<int> > res;
+	// used to detect connected components
+	vector<bool> visited(this->_graph.size(), 0);
+	// vector of cycles
+	vector<vector<int> > res; 
+	// used to get all elementary cycles in connected component
 	bool *color = new (bool[this->_graph.size()]);
-	for (size_t i = 0; i < this->_graph.size(); i++)
-		color[i] = 0;
-	vector<int> curPath;
-	curPath.push_back(0);
-	DFS(0, 0, color, curPath, res);
 
+	for (int i = 0; i < this->_graph.size(); i++)
+	{
+		// found new connected component
+		if (visited[i] == 0)
+		{
+			// reassigne colors 
+			for (size_t i = 0; i < this->_graph.size(); i++)
+				color[i] = 0;
+			vector<int> curPath;
+			curPath.push_back(i);
+			DFS(i, i, color, curPath, res, visited);
+		}
+	}
+	
 	return res;
 }
 

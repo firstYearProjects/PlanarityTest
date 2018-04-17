@@ -1,3 +1,6 @@
-﻿  main.cpp
+﻿  BrutePlanarityTest.cpp
+f:\work\git\planaritytest\graph\graph\bruteplanaritytest.cpp(252): warning C4018: <: несоответствие типов со знаком и без знака
+  main.cpp
 f:\work\git\planaritytest\graph\graph\main.cpp(20): warning C4018: <: несоответствие типов со знаком и без знака
+  Создание кода...
   Graph.vcxproj -> F:\work\Git\PlanarityTest\Graph\Debug\Graph.exe
