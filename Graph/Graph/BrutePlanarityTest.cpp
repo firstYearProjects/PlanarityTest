@@ -9,10 +9,10 @@ bool BrutePlanarityTest::checkPlanarity()
 		return true;
 
 	// Euler formula check.
-	/*if (vertexesCount > 2 && _cntEdges > (3 * vertexesCount - 6)) 
+	if (vertexesCount > 2 && _cntEdges > (3 * vertexesCount - 6)) 
 	{
 		return false;
-	}*/
+	}
 
 	return BruteCheck();
 }

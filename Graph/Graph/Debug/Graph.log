@@ -1,3 +1,7 @@
-﻿  main.cpp
-f:\work\git\planaritytest\graph\graph\main.cpp(31): warning C4018: <: несоответствие типов со знаком и без знака
-  Graph.vcxproj -> F:\work\Git\PlanarityTest\Graph\Debug\Graph.exe
+﻿  BrutePlanarityTest.cpp
+d:\work\git\planaritytest\graph\graph\bruteplanaritytest.cpp(258): warning C4018: <: несоответствие типов со знаком и без знака
+  main.cpp
+d:\work\git\planaritytest\graph\graph\main.cpp(31): warning C4018: <: несоответствие типов со знаком и без знака
+d:\work\git\planaritytest\graph\graph\main.cpp(43): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  Создание кода...
+  Graph.vcxproj -> D:\work\git\PlanarityTest\Graph\Debug\Graph.exe

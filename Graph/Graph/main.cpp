@@ -40,9 +40,10 @@ Graph& getCompleteGraph(size_t n)
 
 Graph& getRandomGraph(size_t n)
 {
+	srand(time(0));
 	Graph* res = new Graph(n);
 	//srand(time(0));
-	int edgeCnt = rand() % (n*(n - 2));
+	int edgeCnt = rand() % (3*n-6);
 	for (int i = 0; i < edgeCnt; i++)
 	{
 		int v1 = 0;
@@ -202,13 +203,13 @@ int main()
 	{
 		cout << "\n";
 		// RND test
-		Test(getRandomGraph(10), "rnd10");
+		Test(getRandomGraph(40), "rnd40");
 	}
 
 	{
 		cout << "\n";
 		// RND test
-		Test(getRandomGraph(20), "rnd20");
+		Test(getRandomGraph(80), "rnd80");
 	}
 
 
