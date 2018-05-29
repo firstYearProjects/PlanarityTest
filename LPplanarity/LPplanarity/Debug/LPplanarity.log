@@ -1,0 +1,3 @@
+﻿  Main.cpp
+f:\work\git\lpplanarity\lpplanarity\main.cpp(33): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  LPplanarity.vcxproj -> F:\work\Git\LPplanarity\Debug\LPplanarity.exe
