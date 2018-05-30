@@ -101,7 +101,7 @@ private:
 	// conflict pairs consisting of current return edges
 	std::stack<ConflictPair> S;
 
-	// edge relative to which side is dened
+	// edge relative to which side is defined
 	EdgeDict<Edge> ref;
 
 	// side of edge, or modier for side of reference edge (-1, 1)

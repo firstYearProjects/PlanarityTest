@@ -144,7 +144,7 @@ int main()
 		g.addEdge(6, 7);
 		g.addEdge(5, 7);
 
-		test(g, "almost K_5 planar", false);
+		test(g, "almost K_5 not planar", false);
 	}
 	{ 
 		// almost K_5 not planar
@@ -167,7 +167,7 @@ int main()
 		g.addEdge(5, 7);
 		g.addEdge(10, 7);
 		g.addEdge(11, 7);
-		test(g, "almost K_5 planar", false);
+		test(g, "almost K_5 not planar", false);
 	}
 
 	system("pause");

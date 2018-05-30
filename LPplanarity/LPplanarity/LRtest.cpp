@@ -246,7 +246,8 @@ void PlanarityTest::addEdgeConstraint(const Edge &v_w)
 		}
 		if (!Q.L().IsEmpty()) 
 		{
-			throw not_planar_exception();
+			////HALT//////
+			throw not_planar_exception(); 
 		}
 		else {
 			if (lowpt[Q.R().low()] > lowpt[u_v]) 
@@ -281,7 +282,8 @@ void PlanarityTest::addEdgeConstraint(const Edge &v_w)
 		}
 		if (conflicting(Q.R(), v_w))
 		{
-			throw not_planar_exception();
+			////HALT//////
+			throw not_planar_exception();          
 		}
 		else 
 		{ 
@@ -293,7 +295,8 @@ void PlanarityTest::addEdgeConstraint(const Edge &v_w)
 			}
 		}
 		if (P.L().IsEmpty()) 
-		{ // topmost interval
+		{ 
+			// topmost interval
 			P.L().high() = Q.L().high();
 		}
 		else 

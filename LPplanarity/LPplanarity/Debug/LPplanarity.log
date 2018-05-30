@@ -1,3 +1,7 @@
-﻿  Main.cpp
-f:\work\git\lpplanarity\lpplanarity\main.cpp(33): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
-  LPplanarity.vcxproj -> F:\work\Git\LPplanarity\Debug\LPplanarity.exe
+﻿  LRtest.cpp
+d:\work\git\planaritytest\lpplanarity\lpplanarity\lrtest.cpp(24): warning C4018: <: несоответствие типов со знаком и без знака
+d:\work\git\planaritytest\lpplanarity\lpplanarity\lrtest.cpp(38): warning C4018: <: несоответствие типов со знаком и без знака
+d:\work\git\planaritytest\lpplanarity\lpplanarity\lrtest.cpp(43): warning C4101: e: неиспользованная локальная переменная
+d:\work\git\planaritytest\lpplanarity\lpplanarity\lrtest.cpp(163): warning C4018: <: несоответствие типов со знаком и без знака
+d:\work\git\planaritytest\lpplanarity\lpplanarity\lrtest.cpp(178): warning C4018: <: несоответствие типов со знаком и без знака
+  LPplanarity.vcxproj -> D:\work\git\PlanarityTest\LPplanarity\Debug\LPplanarity.exe
